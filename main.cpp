@@ -8,6 +8,11 @@ void jogar(Jogador &jogador, Esqueleto &esqueleto);
 void vitoria(Esqueleto esqueleto);
 void derrota(Jogador jogador);
 void instrucoes();
+void textoAcoes();
+void textoLucas();
+void textoStatus();
+void textoEscolha();
+void textoMenu();
 
 int main() {
   char op;
@@ -49,12 +54,7 @@ int main() {
 }
 
 void exibirMenu() {
-  cout << ("███╗░░░███╗███████╗███╗░░██╗██╗░░░██╗\n");
-  cout << ("████╗░████║██╔════╝████╗░██║██║░░░██║\n");
-  cout << ("██╔████╔██║█████╗░░██╔██╗██║██║░░░██║\n");
-  cout << ("██║╚██╔╝██║██╔══╝░░██║╚████║██║░░░██║\n");
-  cout << ("██║░╚═╝░██║███████╗██║░╚███║╚██████╔╝\n");
-  cout << ("╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░╚═════╝░\n\n");
+  textoMenu();
 
   cout << "\x1B[1;32m1 - Jogar\n";
   cout << "2 - Instruções\n";
@@ -64,8 +64,7 @@ void exibirMenu() {
 void jogar(Jogador &jogador, Esqueleto &esqueleto) {
   char escolha;
 
-  cout << "\n█▀▀ █▀ █▀▀ █▀█ █░░ █░█ ▄▀█\n";
-  cout << "██▄ ▄█ █▄▄ █▄█ █▄▄ █▀█ █▀█\n\n";
+  textoEscolha();
   cout << "\x1B[1;36m1 - \x1B[0m\x1B[1;33mAtacar\x1B[0m\n";
   cout << "\x1B[1;36m2 - \x1B[0m\x1B[1;33mDefender\x1B[0m\n";
   cout << "\x1B[1;36m3 - \x1B[0m\x1B[1;31mSAIR\x1B[0m\n\n";
@@ -75,8 +74,7 @@ void jogar(Jogador &jogador, Esqueleto &esqueleto) {
     escolha = getch();
     system("clear");
 
-    cout << "\n█▀▀ █▀ █▀▀ █▀█ █░░ █░█ ▄▀█\n";
-    cout << "██▄ ▄█ █▄▄ █▄█ █▄▄ █▀█ █▀█\n\n";
+    textoEscolha();
     cout << "\x1B[1;36m1 - \x1B[0m\x1B[1;33mAtacar\x1B[0m\n";
     cout << "\x1B[1;36m2 - \x1B[0m\x1B[1;33mDefender\x1B[0m\n";
     cout << "\x1B[1;36m3 - \x1B[0m\x1B[1;31mSAIR\x1B[0m\n\n";
@@ -85,8 +83,7 @@ void jogar(Jogador &jogador, Esqueleto &esqueleto) {
       if (jogador.obterVida() > 0 && esqueleto.obterVida() > 0) {
         jogador.atacar(esqueleto);
 
-        cout << "\n▄▀█ █▀▀ █▀█ █▀▀ █▀\n";
-        cout << "█▀█ █▄▄ █▄█ ██▄ ▄█\n\n";
+        textoAcoes();
         cout << "\x1B[1mJogador\x1B[0m \x1B[1;32matacou\x1B[0m o "
                 "\x1B[1mEsqueleto\x1B[0m!.\nVida atual do "
                 "\x1B[1mEsqueleto\x1B[0m: \x1B[1;31m"
@@ -112,8 +109,7 @@ void jogar(Jogador &jogador, Esqueleto &esqueleto) {
         }
       }
 
-      cout << "\n\n█▀ ▀█▀ ▄▀█ ▀█▀ █░█ █▀\n";
-      cout << "▄█ ░█░ █▀█ ░█░ █▄█ ▄█\n\n";
+      textoStatus();
       cout << "Vida Atual: \x1B[1;32m" << jogador.obterVida() << "\x1B[0m\n"
            << endl;
       cout << "Vida do inimigo: \x1B[1;31m" << esqueleto.obterVida()
@@ -123,8 +119,7 @@ void jogar(Jogador &jogador, Esqueleto &esqueleto) {
     if (escolha == '2') {
       jogador.defender();
 
-      cout << "\n▄▀█ █▀▀ █▀█ █▀▀ █▀\n";
-      cout << "█▀█ █▄▄ █▄█ ██▄ ▄█\n\n";
+      textoAcoes();
 
       cout << "\x1B[1mJogador\x1B[0m escolheu \x1B[1;33mdefender\x1B[0m! "
               "Dano reduzido pela metade.\n";
@@ -142,8 +137,7 @@ void jogar(Jogador &jogador, Esqueleto &esqueleto) {
         break;
       }
 
-      cout << "\n\n█▀ ▀█▀ ▄▀█ ▀█▀ █░█ █▀\n";
-      cout << "▄█ ░█░ █▀█ ░█░ █▄█ ▄█\n\n";
+      textoStatus();
       cout << "Vida Atual: \x1B[1;32m" << jogador.obterVida() << "\x1B[0m\n"
            << endl;
       cout << "Vida do inimigo: \x1B[1;31m" << esqueleto.obterVida()
@@ -172,10 +166,7 @@ void instrucoes() {
          << endl;
     cout << "\x1B[1;32m1 - Voltar\x1B[0m\n";
 
-    cout << ("\n\n\n\n\n█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ 　 █▀▀▄ █──█ 　 █── █──█ █▀▀ █▀▀█ "
-             "█▀▀\n");
-    cout << ("█─▀─█ █▄▄█ █──█ █▀▀ 　 █▀▀▄ █▄▄█ 　 █── █──█ █── █▄▄█ ▀▀█\n");
-    cout << ("▀───▀ ▀──▀ ▀▀▀─ ▀▀▀ 　 ▀▀▀─ ▄▄▄█ 　 ▀▀▀ ─▀▀▀ ▀▀▀ ▀──▀ ▀▀▀\n");
+    textoLucas();
     op2 = getch();
 
     if (op2 == '1') {
@@ -201,4 +192,35 @@ void derrota(Jogador jogador) {
   cout << "\n\x1B[1;32m█▄─▄▄▀█▄─▄▄─█▄─▄▄▀█▄─▄▄▀█─▄▄─█─▄─▄─██▀▄─██\x1B[0m";
   cout << "\n\x1B[1;32m██─██─██─▄█▀██─▄─▄██─▄─▄█─██─███─████─▀─██\x1B[0m";
   cout << "\n\x1B[1;32m▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▀▀▄▄▀▄▄▀\x1B[0m";
+}
+
+void textoAcoes(){
+  cout << "\n▄▀█ █▀▀ █▀█ █▀▀ █▀\n";
+      cout << "█▀█ █▄▄ █▄█ ██▄ ▄█\n\n";
+}
+
+void textoStatus(){
+        cout << "\n\n█▀ ▀█▀ ▄▀█ ▀█▀ █░█ █▀\n";
+      cout << "▄█ ░█░ █▀█ ░█░ █▄█ ▄█\n\n";
+}
+
+void textoEscolha(){
+  cout << "\n█▀▀ █▀ █▀▀ █▀█ █░░ █░█ ▄▀█\n";
+  cout << "██▄ ▄█ █▄▄ █▄█ █▄▄ █▀█ █▀█\n\n";
+}
+
+void textoLucas(){
+      cout << ("\n\n\n\n\n█▀▄▀█ █▀▀█ █▀▀▄ █▀▀ 　 █▀▀▄ █──█ 　 █── █──█ █▀▀ █▀▀█ "
+             "█▀▀\n");
+    cout << ("█─▀─█ █▄▄█ █──█ █▀▀ 　 █▀▀▄ █▄▄█ 　 █── █──█ █── █▄▄█ ▀▀█\n");
+    cout << ("▀───▀ ▀──▀ ▀▀▀─ ▀▀▀ 　 ▀▀▀─ ▄▄▄█ 　 ▀▀▀ ─▀▀▀ ▀▀▀ ▀──▀ ▀▀▀\n");
+}
+
+void textoMenu(){
+  cout << ("███╗░░░███╗███████╗███╗░░██╗██╗░░░██╗\n");
+  cout << ("████╗░████║██╔════╝████╗░██║██║░░░██║\n");
+  cout << ("██╔████╔██║█████╗░░██╔██╗██║██║░░░██║\n");
+  cout << ("██║╚██╔╝██║██╔══╝░░██║╚████║██║░░░██║\n");
+  cout << ("██║░╚═╝░██║███████╗██║░╚███║╚██████╔╝\n");
+  cout << ("╚═╝░░░░░╚═╝╚══════╝╚═╝░░╚══╝░╚═════╝░\n\n");
 }
